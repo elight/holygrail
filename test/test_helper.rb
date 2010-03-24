@@ -6,3 +6,5 @@ begin require 'redgreen';   rescue LoadError; end
 begin require 'phocus';     rescue LoadError; end
 
 require 'rails/init'
+
+require 'fake_rails_app'

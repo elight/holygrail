@@ -1,9 +1,9 @@
 require 'test/test_helper'
 
-class HolyGrailsControllerTest < ActionController::TestCase
+class HolyGrailIntegrationTest < ActionController::IntegrationTest
   test "api" do
-    assert_respond_to self, :execute_javascript
-    assert_respond_to self, :js
+    assert_nothing_raised { js("1 + 1") }
+    assert_nothing_raised { execute_javascript("1 + 1") }
   end
 
   test "parses simple js" do
@@ -19,22 +19,22 @@ class HolyGrailsControllerTest < ActionController::TestCase
   end
 
   test "response context doesn't bleed into next response" do
-    get :foo
+    get '/foo'
     js("foo = 'bar'")
     assert_equal 'bar', js('foo')
 
-    get :foo
+    get '/foo'
     assert_raises(Johnson::Error) { js('foo') }
   end
 
   test "DOM" do
-    get :foo
+    get '/foo'
     assert_equal 'Foo', js("document.title")
     assert_equal  2,    js("document.getElementsByTagName('div').length")
   end
 
   test "resolves <script scr> URIs" do
-    get :bar
+    get '/bar'
     assert_equal 'grail', js("holy()") #src with double quotes + absolute path
     assert_equal 'foo',   js("foo()")  #src with single quotes + relative path
 
