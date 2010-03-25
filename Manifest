@@ -6,6 +6,8 @@ Rakefile
 docs.watchr
 holygrail.gemspec
 lib/holygrail.rb
+lib/holygrail/functional_hooks.rb
+lib/holygrail/integration_hooks.rb
 public/javascripts/application.js
 public/javascripts/foo.js
 rails/init.rb
